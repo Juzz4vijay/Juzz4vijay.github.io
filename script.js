@@ -1,18 +1,21 @@
-// Neural network background (hero canvas) — subtle nod to the AI/CV theme
+// Hero canvas: multi-hued neural network + a flowing double-helix ribbon —
+// nods to AI (nodes/links), pharma (helix/base-pairs), and maritime (wave motion)
 (function initNeuralCanvas() {
   const canvas = document.getElementById('neuralCanvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
   const hero = canvas.closest('.hero');
   let width, height, nodes;
+  let t = 0;
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function getAccentColors() {
     const styles = getComputedStyle(document.documentElement);
-    return {
-      dot: styles.getPropertyValue('--accent-2').trim() || '#06b6d4',
-      line: styles.getPropertyValue('--accent').trim() || '#4f46e5'
-    };
+    return [
+      styles.getPropertyValue('--accent-2').trim() || '#0891b2',
+      styles.getPropertyValue('--accent').trim() || '#7c3aed',
+      styles.getPropertyValue('--accent-3').trim() || '#db2777'
+    ];
   }
 
   function resize() {
@@ -20,20 +23,67 @@
     height = canvas.height = hero.clientHeight * devicePixelRatio;
     canvas.style.width = hero.clientWidth + 'px';
     canvas.style.height = hero.clientHeight + 'px';
-    const density = Math.min(70, Math.floor((hero.clientWidth * hero.clientHeight) / 18000));
-    nodes = Array.from({ length: density }, () => ({
+    const density = Math.min(60, Math.floor((hero.clientWidth * hero.clientHeight) / 20000));
+    nodes = Array.from({ length: density }, (_, i) => ({
       x: Math.random() * width,
       y: Math.random() * height,
-      vx: (Math.random() - 0.5) * 0.25 * devicePixelRatio,
-      vy: (Math.random() - 0.5) * 0.25 * devicePixelRatio,
-      r: (Math.random() * 1.6 + 1) * devicePixelRatio
+      vx: (Math.random() - 0.5) * 0.22 * devicePixelRatio,
+      vy: (Math.random() - 0.5) * 0.22 * devicePixelRatio,
+      r: (Math.random() * 1.6 + 1) * devicePixelRatio,
+      hue: i % 3
     }));
   }
 
+  function drawHelix(colors) {
+    const amp = height * 0.09;
+    const freq = (Math.PI * 2) / (width * 0.5);
+    const midY = height * 0.32;
+    const step = 10 * devicePixelRatio;
+
+    for (let strand = 0; strand < 2; strand++) {
+      const phase = strand === 0 ? t : t + Math.PI;
+      ctx.beginPath();
+      for (let x = 0; x <= width; x += step) {
+        const y = midY + Math.sin(x * freq + phase) * amp;
+        if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      const grad = ctx.createLinearGradient(0, 0, width, 0);
+      grad.addColorStop(0, colors[0]);
+      grad.addColorStop(0.5, colors[1]);
+      grad.addColorStop(1, colors[2]);
+      ctx.strokeStyle = grad;
+      ctx.globalAlpha = 0.3;
+      ctx.lineWidth = 1.4 * devicePixelRatio;
+      ctx.stroke();
+    }
+
+    ctx.globalAlpha = 0.28;
+    const rungGap = 55 * devicePixelRatio;
+    for (let x = 0; x <= width; x += rungGap) {
+      const y1 = midY + Math.sin(x * freq + t) * amp;
+      const y2 = midY + Math.sin(x * freq + t + Math.PI) * amp;
+      ctx.strokeStyle = colors[(Math.round(x / rungGap)) % 3];
+      ctx.lineWidth = devicePixelRatio;
+      ctx.beginPath();
+      ctx.moveTo(x, y1);
+      ctx.lineTo(x, y2);
+      ctx.stroke();
+
+      ctx.fillStyle = colors[(Math.round(x / rungGap)) % 3];
+      ctx.globalAlpha = 0.5;
+      ctx.beginPath(); ctx.arc(x, y1, 2 * devicePixelRatio, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.arc(x, y2, 2 * devicePixelRatio, 0, Math.PI * 2); ctx.fill();
+      ctx.globalAlpha = 0.28;
+    }
+    ctx.globalAlpha = 1;
+  }
+
   function step() {
-    const { dot, line } = getAccentColors();
+    const colors = getAccentColors();
     ctx.clearRect(0, 0, width, height);
     const linkDist = 150 * devicePixelRatio;
+
+    drawHelix(colors);
 
     for (const n of nodes) {
       n.x += n.vx; n.y += n.vy;
@@ -47,8 +97,8 @@
         const dx = a.x - b.x, dy = a.y - b.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
         if (dist < linkDist) {
-          ctx.strokeStyle = line;
-          ctx.globalAlpha = (1 - dist / linkDist) * 0.35;
+          ctx.strokeStyle = colors[1];
+          ctx.globalAlpha = (1 - dist / linkDist) * 0.3;
           ctx.lineWidth = devicePixelRatio;
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
@@ -58,15 +108,16 @@
       }
     }
 
-    ctx.globalAlpha = 0.8;
-    ctx.fillStyle = dot;
     for (const n of nodes) {
+      ctx.globalAlpha = 0.8;
+      ctx.fillStyle = colors[n.hue];
       ctx.beginPath();
       ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
       ctx.fill();
     }
     ctx.globalAlpha = 1;
 
+    t += 0.006;
     if (!prefersReducedMotion) requestAnimationFrame(step);
   }
 
@@ -78,15 +129,15 @@
 // Year in footer
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Theme toggle with persistence
+// Theme toggle with persistence — dark is the default brand appearance;
+// only an explicit user choice (saved below) switches to light.
 const themeToggle = document.getElementById('themeToggle');
 const root = document.documentElement;
 const savedTheme = localStorage.getItem('theme');
 if (savedTheme) root.setAttribute('data-theme', savedTheme);
 
 themeToggle.addEventListener('click', () => {
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const current = root.getAttribute('data-theme') || (prefersDark ? 'dark' : 'light');
+  const current = root.getAttribute('data-theme') || 'dark';
   const next = current === 'dark' ? 'light' : 'dark';
   root.setAttribute('data-theme', next);
   localStorage.setItem('theme', next);
