@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vijay Rameshkumar — Data Science &amp; AI/ML Leader</title>
+<meta name="description" content="Vijay Rameshkumar — Data Science and Machine Learning professional specializing in Generative AI, Agentic AI, and RAG systems.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧠</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<noscript><style>.reveal{opacity:1!important;transform:none!important;}</style></noscript>
+</head>
+<body>
+
+<div class="noise-overlay"></div>
+
+<header class="site-header" id="top">
+  <nav class="nav container">
+    <a href="#top" class="logo">VR<span>.</span></a>
+    <button type="button" class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about" class="nav-link">About</a></li>
+      <li><a href="#skills" class="nav-link">Skills</a></li>
+      <li><a href="#experience" class="nav-link">Experience</a></li>
+      <li><a href="#products" class="nav-link">Products</a></li>
+      <li><a href="#achievements" class="nav-link">Achievements</a></li>
+      <li><a href="#education" class="nav-link">Education</a></li>
+      <li><a href="#contact" class="nav-link">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button type="button" id="themeToggle" class="icon-btn" aria-label="Toggle color theme" title="Toggle theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <a href="resume/Vijay_Rameshkumar_Resume.pdf" class="btn btn-primary btn-sm" download>Resume</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <canvas id="neuralCanvas" aria-hidden="true"></canvas>
+    <div class="scanline" aria-hidden="true"></div>
+    <div class="container hero-inner">
+    <p class="eyebrow reveal"><span class="eyebrow-dot"></span>Hello, I'm</p>
+    <div class="hero-name-frame reveal">
+      <h1 class="hero-name">Vijay Rameshkumar</h1>
+      <span class="frame-tag frame-tag-tl" aria-hidden="true">SYS.ID // VR-01</span>
+      <span class="frame-tag frame-tag-br" aria-hidden="true">CONFIDENCE 0.99</span>
+    </div>
+    <h2 class="hero-title reveal">
+      <span class="rotator" id="rotator">Data Scientist</span>
+    </h2>
+    <div class="tag-row reveal">
+      <span class="tech-tag">AI / ML</span>
+      <span class="tech-tag">Computer Vision</span>
+      <span class="tech-tag">LLMs &amp; Transformers</span>
+      <span class="tech-tag">Agentic AI</span>
+      <span class="tech-tag">Robotics</span>
+    </div>
+    <p class="hero-summary reveal">
+      Strategic and innovation-driven Data Science Consultant and Machine Learning Engineer with
+      <strong>7+ years</strong> of experience building AI-driven, predictive, and agentic systems across
+      maritime, telecom, and big-data domains — delivering <strong>$3.5M+</strong> in measurable cost savings
+      through production-ready ML and Generative AI solutions.
+    </p>
+    <div class="hero-actions reveal">
+      <a href="resume/Vijay_Rameshkumar_Resume.pdf" class="btn btn-primary" download>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        Download Resume
+      </a>
+      <a href="https://github.com/Juzz4vijay" target="_blank" rel="noopener" class="btn btn-outline">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a12 12 0 0 0-3.79 23.4c.6.11.82-.26.82-.58v-2.16c-3.34.72-4.04-1.42-4.04-1.42-.55-1.38-1.33-1.75-1.33-1.75-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.62-5.49 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0 0 12 .5z"/></svg>
+        GitHub
+      </a>
+      <a href="https://vijayrameshkumar.github.io/bio/" target="_blank" rel="noopener" class="btn btn-outline">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z"/></svg>
+        Bio Site
+      </a>
+    </div>
+    <div class="hero-meta reveal">
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>Chennai, India</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg><a href="mailto:juzz4vijay@gmail.com">juzz4vijay@gmail.com</a></span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>+91-8610486323</span>
+    </div>
+    </div>
+    <a href="#about" class="scroll-cue" aria-label="Scroll to content"><span></span></a>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="container">
+      <p class="section-tag reveal">01 · About</p>
+      <h2 class="section-title reveal">Profile Summary</h2>
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <p>Accomplished Data Science and Machine Learning professional with over <strong>7 years of experience</strong> delivering AI-driven, predictive, and intelligent automation solutions across maritime, telecom, and big-data domains.</p>
+          <p>Skilled in developing <strong>RAG solutions</strong>, Generative and Agentic AI architectures, integrating multi-model intelligence for autonomous decision-making and real-time analytics.</p>
+          <p>Proficient in <strong>Python, TensorFlow, Keras, Azure ML, AWS, and GCP</strong>, with expertise in ML pipeline automation, feature engineering, and stakeholder collaboration to drive strategic insights.</p>
+          <p>Strategic AI &amp; Data Science Leader driving <strong>$3.5M+ in cost savings</strong> through cross-functional collaboration and innovative ML solutions across maritime, logistics, and telecom domains; adept at crafting and presenting AI roadmaps to executive stakeholders.</p>
+        </div>
+        <div class="competencies reveal">
+          <h3>Core Competencies</h3>
+          <ul>
+            <li>Data Science Consulting &amp; AI Strategy</li>
+            <li>ML Engineering &amp; Model Deployment</li>
+            <li>AI &amp; RAG Pipelines</li>
+            <li>Generative AI &amp; Agentic AI Systems</li>
+            <li>Predictive Maintenance &amp; Intelligent Automation</li>
+            <li>Recommender Systems &amp; Optimization</li>
+            <li>Deep Learning, Neural Networks &amp; Transfer Learning</li>
+            <li>Big Data Analytics, OCR &amp; IDP</li>
+            <li>NLP &amp; Computer Vision</li>
+            <li>Statistical, Predictive &amp; Time Series Modelling</li>
+            <li>End-to-End ML Pipeline Automation</li>
+            <li>Stakeholder Engagement &amp; Data-Driven Decisions</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="section section-alt" id="skills">
+    <div class="container">
+      <p class="section-tag reveal">02 · Skills</p>
+      <h2 class="section-title reveal">Technical Skills</h2>
+      <div class="skills-grid">
+
+        <div class="skill-card reveal">
+          <div class="skill-icon">🧠</div>
+          <h3>Machine Learning &amp; AI</h3>
+          <p>Deep Learning, Neural Network Architecture, Time Series Forecasting, Anomaly Detection, Predictive Modeling, Statistical Analysis, Explanatory Modeling, NLP, Recommender Systems, MLOps, Model Optimization, A/B Testing</p>
+        </div>
+
+        <div class="skill-card reveal">
+          <div class="skill-icon">✨</div>
+          <h3>Generative AI</h3>
+          <p>LLMs (GPT, BERT, Transformers), RAG Pipelines, Graph RAG (AST-RAG), LangChain, LangGraph, Agentic Workflows, Prompt Engineering, LoRA Fine-tuning, GANs, VAEs, Embeddings, Vector Databases, Multimodal AI, Document Processing</p>
+        </div>
+
+        <div class="skill-card reveal">
+          <div class="skill-icon">👁️</div>
+          <h3>Computer Vision</h3>
+          <p>YOLO, R-CNN, Image Segmentation, Object Tracking, Pose Detection</p>
+        </div>
+
+        <div class="skill-card reveal">
+          <div class="skill-icon">💬</div>
+          <h3>NLP</h3>
+          <p>BERT, GPT, Transformers, Sentiment Analysis, Text Classification</p>
+        </div>
+
+        <div class="skill-card reveal">
+          <div class="skill-icon">📈</div>
+          <h3>Time Series &amp; Recommenders</h3>
+          <p>LSTM, ARIMA, Prophet, Anomaly Detection, Supplier Recommender Systems</p>
+        </div>
+
+        <div class="skill-card reveal">
+          <div class="skill-icon">📊</div>
+          <h3>Data Visualization &amp; BI</h3>
+          <p>Power BI, Interactive &amp; Real-time Dashboards, Matplotlib, Seaborn, Bokeh, Plotly, Python APIs, Enterprise Reporting</p>
+        </div>
+
+        <div class="skill-card reveal">
+          <div class="skill-icon">💻</div>
+          <h3>Programming Languages</h3>
+          <p>Python (TensorFlow 2.x, PyTorch, Keras, Scikit-learn, Pandas, NumPy, Statsmodels), SQL, C++</p>
+        </div>
+
+        <div class="skill-card reveal">
+          <div class="skill-icon">☁️</div>
+          <h3>Cloud Platforms</h3>
+          <p>AWS (SageMaker, Lambda, EC2, S3, ECS, ECR, API Gateway, DynamoDB, CloudWatch), Azure (ML Studio, OpenAI Services, Databricks, Cognitive Services)</p>
+        </div>
+
+        <div class="skill-card reveal">
+          <div class="skill-icon">🗄️</div>
+          <h3>Data Management</h3>
+          <p>PostgreSQL, MySQL, MongoDB, NoSQL, Snowflake, Apache Spark, Databricks, Vespa Vector DB</p>
+        </div>
+
+        <div class="skill-card reveal">
+          <div class="skill-icon">⚙️</div>
+          <h3>MLOps &amp; Infrastructure</h3>
+          <p>MLFlow, Airflow, Docker, ECR, ECS, Model Registry, CI/CD Pipelines, Grafana, Elasticsearch</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="section" id="experience">
+    <div class="container">
+      <p class="section-tag reveal">03 · Experience</p>
+      <h2 class="section-title reveal">Work Experience</h2>
+
+      <div class="timeline">
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-head">
+              <h3>Senior AI/ML Engineer</h3>
+              <span class="timeline-date">Apr '26 – Present</span>
+            </div>
+            <p class="timeline-company">Miracle Software Private Limited (FORD) · Chennai</p>
+            <ul>
+              <li>Analyzed complex program data to uncover business improvement opportunities and support strategic decision-making.</li>
+              <li>Designed and implemented a vehicle program tracking platform covering design, engineering, manufacturing, launch, marketing, and warranty phases.</li>
+              <li>Applied machine learning models to forecast warranty risks and detect schedule bottlenecks before critical milestones.</li>
+              <li>Developed early-warning and alerting mechanisms for program managers, enabling timely intervention and reducing project delays.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-head">
+              <h3>Tech Lead - AI</h3>
+              <span class="timeline-date">Oct '25 – Jan '26</span>
+            </div>
+            <p class="timeline-company">Exavalu Private Limited · Chennai</p>
+            <ul>
+              <li>Led development of Intelligent Document Processing (IDP) solutions for insurance automation.</li>
+              <li>Managed a 10-member product team, ensuring efficient delivery and innovation.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-head">
+              <h3>Senior Data Scientist</h3>
+              <span class="timeline-date">Jan '23 – Oct '25</span>
+            </div>
+            <p class="timeline-company">Synergy Maritime · Chennai</p>
+            <ul>
+              <li>Analyzed extensive ship performance datasets to recommend optimal vessel speeds, enhancing engine efficiency and minimizing fuel consumption and emissions.</li>
+              <li>Developed and deployed a Hybrid Vessel Scorecard in Azure ML, integrating real-time performance metrics for fleet-wide operational benchmarking.</li>
+              <li>Led Intelligent Document Processing (IDP) solutions for insurance automation using OCR, NLP, and LLM technologies.</li>
+              <li>Engineered and deployed AI-driven predictive maintenance models achieving annual savings of <strong>USD 1.2 million</strong> through reduced downtime and optimized vessel operations.</li>
+              <li>Delivered <strong>USD 3 million monthly</strong> cost savings across 564 vessels, improving sourcing efficiency and contract utilization.</li>
+              <li>Integrated multi-model Agentic AI frameworks &amp; product prototypes, enabling autonomous analytics as an independent developer.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-head">
+              <h3>Data Scientist</h3>
+              <span class="timeline-date">Apr '22 – Jan '23</span>
+            </div>
+            <p class="timeline-company">Value Labs · Hyderabad (WFH)</p>
+            <ul>
+              <li>Investigated real-time supply chain data to identify key patterns impacting procurement and logistics performance.</li>
+              <li>Designed and implemented a Hybrid Recommender System to enhance vendor selection and supply chain optimization.</li>
+              <li>Deployed the recommendation model on AWS, ensuring scalability, reliability, and enterprise integration.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-head">
+              <h3>Data Scientist</h3>
+              <span class="timeline-date">Apr '21 – Mar '22</span>
+            </div>
+            <p class="timeline-company">CanGo Networks Telecommunications · Chennai</p>
+            <ul>
+              <li>Researched real-time telecom fault prediction, engineering dynamic predictive models to reduce network downtime.</li>
+              <li>Devised an AR-based multi-KPI optimization algorithm enabling unified monitoring and performance enhancement.</li>
+              <li>Engineered a graph-based fault prediction framework to anticipate device failures across large-scale telecom networks.</li>
+              <li>Developed an intelligent recommendation engine via root cause analysis (RCA) for data-driven corrective actions.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-head">
+              <h3>Data Scientist</h3>
+              <span class="timeline-date">Nov '19 – Nov '20</span>
+            </div>
+            <p class="timeline-company">Machine Origin · Bangalore</p>
+            <ul>
+              <li>Translated business requirements into ML problem statements, designing end-to-end computer vision models from concept to deployment.</li>
+              <li>Developed and validated deep learning models for detecting abnormal activities in live CCTV footage using classification, detection, segmentation, tracking, and pose estimation.</li>
+              <li>Collaborated with cross-functional teams to integrate computer vision pipelines into production environments.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-head">
+              <h3>Junior Robotics / Automation Engineer</h3>
+              <span class="timeline-date">Jun '18</span>
+            </div>
+            <p class="timeline-company">Suriyan Innovative LLP · Bangalore</p>
+            <ul>
+              <li>Designed IoT-enabled robotic systems integrating embedded hardware, 3D printing, and cloud connectivity.</li>
+              <li>Built end-to-end IoT solutions using ESP32, Arduino &amp; Raspberry Pi with MQTT for device-to-cloud communication.</li>
+              <li>Integrated 50+ sensor types through datasheet-driven configuration for accurate data acquisition.</li>
+              <li>Developed precision motor control systems using stepper/servo motors, H-bridge circuits &amp; PWM control.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-head">
+              <h3>Claim Processing Executive</h3>
+              <span class="timeline-date">May '17 – Nov '17</span>
+            </div>
+            <p class="timeline-company">Annexmed Pvt. Ltd. · Chennai</p>
+            <ul>
+              <li>Processed and validated medical insurance claims and appeals for US-based clients, ensuring accuracy and compliance.</li>
+              <li>Analyzed claim discrepancies to reduce rejections and accelerate reimbursements.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section class="section section-alt" id="products">
+    <div class="container">
+      <p class="section-tag reveal">04 · Products</p>
+      <h2 class="section-title reveal">Product Contributions</h2>
+      <div class="products-grid">
+        <div class="product-card reveal">
+          <h3>Propulsion Pro AI</h3>
+          <p>Real-time conversational AI for vessel troubleshooting and root-cause analysis across 500+ ships.</p>
+        </div>
+        <div class="product-card reveal">
+          <h3>Ocean Eye Agentic AI Platform</h3>
+          <p>Automated maritime workflows, cutting manual document handling by 80%.</p>
+        </div>
+        <div class="product-card reveal">
+          <h3>Enterprise RAG Chatbot</h3>
+          <p>AI chatbot for voyage tracking and performance insights with document intelligence.</p>
+        </div>
+        <div class="product-card reveal">
+          <h3>Supply Chain Analytics Dashboard</h3>
+          <p>Optimized supply chain efficiency, reducing bottlenecks by 25%.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACHIEVEMENTS -->
+  <section class="section" id="achievements">
+    <div class="container">
+      <p class="section-tag reveal">05 · Achievements</p>
+      <h2 class="section-title reveal">Impact by the Numbers</h2>
+      <div class="stats-grid">
+        <div class="stat-card reveal">
+          <span class="stat-value" data-target="3.5" data-suffix="M+" data-prefix="$">$3.5M+</span>
+          <span class="stat-label">Total cost savings driven across maritime, logistics &amp; telecom</span>
+        </div>
+        <div class="stat-card reveal">
+          <span class="stat-value" data-target="1.2" data-suffix="M/yr" data-prefix="$">$1.2M/yr</span>
+          <span class="stat-label">Predictive maintenance savings through optimized asset efficiency</span>
+        </div>
+        <div class="stat-card reveal">
+          <span class="stat-value" data-target="3" data-suffix="M/mo" data-prefix="$">$3M/mo</span>
+          <span class="stat-label">Procurement savings across 564 vessels via vendor recommender system</span>
+        </div>
+        <div class="stat-card reveal">
+          <span class="stat-value" data-target="50" data-suffix="%">50%</span>
+          <span class="stat-label">Predictive accuracy improvement through advanced feature engineering</span>
+        </div>
+        <div class="stat-card reveal">
+          <span class="stat-value" data-target="30" data-suffix="%">30%</span>
+          <span class="stat-label">Turnaround-time reduction from a streamlined ship-performance pipeline</span>
+        </div>
+        <div class="stat-card reveal">
+          <span class="stat-value" data-target="10" data-suffix="%">10%</span>
+          <span class="stat-label">Equipment downtime cut through a predictive maintenance model</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION / CERTIFICATIONS -->
+  <section class="section section-alt" id="education">
+    <div class="container">
+      <p class="section-tag reveal">06 · Education</p>
+      <h2 class="section-title reveal">Education &amp; Certifications</h2>
+      <div class="edu-grid">
+
+        <div class="edu-col reveal">
+          <h3>Education</h3>
+          <div class="edu-item">
+            <h4>MS Computer Science (AI &amp; ML)</h4>
+            <p>Woolf / Scaler University · 2024 – 2026</p>
+          </div>
+          <div class="edu-item">
+            <h4>Post Graduate Program in AI/ML</h4>
+            <p>Purdue University · 2024</p>
+          </div>
+          <div class="edu-item">
+            <h4>Bachelor of Engineering (B.E.), Mechatronics</h4>
+            <p>Anna University, Chennai, IN · 2013 – 2017</p>
+          </div>
+        </div>
+
+        <div class="edu-col reveal">
+          <h3>Certifications</h3>
+          <div class="edu-item">
+            <h4>Post Graduate Program in AI/ML</h4>
+            <p>Purdue University · 2024</p>
+          </div>
+          <div class="edu-item">
+            <h4>Practical Time Series Analysis</h4>
+            <p>State University of New York · 2021</p>
+          </div>
+          <div class="edu-item">
+            <h4>Applied AI Certified – Advanced Machine Learning</h4>
+            <p>Professional Development · 2021</p>
+          </div>
+          <div class="edu-item">
+            <h4>IoT Solution Engineer Certification</h4>
+            <p>Edureka · 2019</p>
+          </div>
+        </div>
+
+        <div class="edu-col reveal">
+          <h3>Professional Courses</h3>
+          <div class="edu-item">
+            <h4>Data Science Master's Program</h4>
+            <p>Applied AI (Advanced AI)</p>
+          </div>
+          <div class="edu-item">
+            <h4>AI (Machine Learning) Certification</h4>
+            <p>Hope Tutors</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section contact-section" id="contact">
+    <div class="container">
+      <p class="section-tag reveal">07 · Contact</p>
+      <h2 class="section-title reveal">Let's Build Something Intelligent</h2>
+      <p class="contact-lede reveal">Open to Data Science, ML Engineering, Generative AI, and Agentic AI Systems roles &mdash; reach out directly or connect below.</p>
+      <div class="contact-grid reveal">
+        <a href="mailto:juzz4vijay@gmail.com" class="contact-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>
+          <span>juzz4vijay@gmail.com</span>
+        </a>
+        <a href="tel:+918610486323" class="contact-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span>+91&nbsp;86104&nbsp;86323</span>
+        </a>
+        <a href="https://www.linkedin.com/in/vijayrameshkumar/" target="_blank" rel="noopener" class="contact-card">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56z"/></svg>
+          <span>linkedin.com/in/vijayrameshkumar</span>
+        </a>
+        <a href="https://github.com/Juzz4vijay" target="_blank" rel="noopener" class="contact-card">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a12 12 0 0 0-3.79 23.4c.6.11.82-.26.82-.58v-2.16c-3.34.72-4.04-1.42-4.04-1.42-.55-1.38-1.33-1.75-1.33-1.75-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.62-5.49 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0 0 12 .5z"/></svg>
+          <span>github.com/Juzz4vijay</span>
+        </a>
+        <a href="https://vijayrameshkumar.github.io/bio/" target="_blank" rel="noopener" class="contact-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z"/></svg>
+          <span>vijayrameshkumar.github.io/bio</span>
+        </a>
+        <a href="resume/Vijay_Rameshkumar_Resume.pdf" download class="contact-card contact-card-accent">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          <span>Download Resume (PDF)</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>&copy; <span id="year"></span> Vijay Rameshkumar. Built with HTML, CSS &amp; JS.</p>
+    <a href="#top" class="back-to-top">Back to top ↑</a>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
