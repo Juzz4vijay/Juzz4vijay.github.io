@@ -1,131 +1,3 @@
-// Hero canvas: multi-hued neural network + a flowing double-helix ribbon —
-// nods to AI (nodes/links), pharma (helix/base-pairs), and maritime (wave motion)
-(function initNeuralCanvas() {
-  const canvas = document.getElementById('neuralCanvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  const hero = canvas.closest('.hero');
-  let width, height, nodes;
-  let t = 0;
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  function getAccentColors() {
-    const styles = getComputedStyle(document.documentElement);
-    return [
-      styles.getPropertyValue('--accent-2').trim() || '#0891b2',
-      styles.getPropertyValue('--accent').trim() || '#7c3aed',
-      styles.getPropertyValue('--accent-3').trim() || '#db2777'
-    ];
-  }
-
-  function resize() {
-    width = canvas.width = hero.clientWidth * devicePixelRatio;
-    height = canvas.height = hero.clientHeight * devicePixelRatio;
-    canvas.style.width = hero.clientWidth + 'px';
-    canvas.style.height = hero.clientHeight + 'px';
-    const density = Math.min(60, Math.floor((hero.clientWidth * hero.clientHeight) / 20000));
-    nodes = Array.from({ length: density }, (_, i) => ({
-      x: Math.random() * width,
-      y: Math.random() * height,
-      vx: (Math.random() - 0.5) * 0.22 * devicePixelRatio,
-      vy: (Math.random() - 0.5) * 0.22 * devicePixelRatio,
-      r: (Math.random() * 1.6 + 1) * devicePixelRatio,
-      hue: i % 3
-    }));
-  }
-
-  function drawHelix(colors) {
-    const amp = height * 0.09;
-    const freq = (Math.PI * 2) / (width * 0.5);
-    const midY = height * 0.32;
-    const step = 10 * devicePixelRatio;
-
-    for (let strand = 0; strand < 2; strand++) {
-      const phase = strand === 0 ? t : t + Math.PI;
-      ctx.beginPath();
-      for (let x = 0; x <= width; x += step) {
-        const y = midY + Math.sin(x * freq + phase) * amp;
-        if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
-      }
-      const grad = ctx.createLinearGradient(0, 0, width, 0);
-      grad.addColorStop(0, colors[0]);
-      grad.addColorStop(0.5, colors[1]);
-      grad.addColorStop(1, colors[2]);
-      ctx.strokeStyle = grad;
-      ctx.globalAlpha = 0.3;
-      ctx.lineWidth = 1.4 * devicePixelRatio;
-      ctx.stroke();
-    }
-
-    ctx.globalAlpha = 0.28;
-    const rungGap = 55 * devicePixelRatio;
-    for (let x = 0; x <= width; x += rungGap) {
-      const y1 = midY + Math.sin(x * freq + t) * amp;
-      const y2 = midY + Math.sin(x * freq + t + Math.PI) * amp;
-      ctx.strokeStyle = colors[(Math.round(x / rungGap)) % 3];
-      ctx.lineWidth = devicePixelRatio;
-      ctx.beginPath();
-      ctx.moveTo(x, y1);
-      ctx.lineTo(x, y2);
-      ctx.stroke();
-
-      ctx.fillStyle = colors[(Math.round(x / rungGap)) % 3];
-      ctx.globalAlpha = 0.5;
-      ctx.beginPath(); ctx.arc(x, y1, 2 * devicePixelRatio, 0, Math.PI * 2); ctx.fill();
-      ctx.beginPath(); ctx.arc(x, y2, 2 * devicePixelRatio, 0, Math.PI * 2); ctx.fill();
-      ctx.globalAlpha = 0.28;
-    }
-    ctx.globalAlpha = 1;
-  }
-
-  function step() {
-    const colors = getAccentColors();
-    ctx.clearRect(0, 0, width, height);
-    const linkDist = 150 * devicePixelRatio;
-
-    drawHelix(colors);
-
-    for (const n of nodes) {
-      n.x += n.vx; n.y += n.vy;
-      if (n.x < 0 || n.x > width) n.vx *= -1;
-      if (n.y < 0 || n.y > height) n.vy *= -1;
-    }
-
-    for (let i = 0; i < nodes.length; i++) {
-      for (let j = i + 1; j < nodes.length; j++) {
-        const a = nodes[i], b = nodes[j];
-        const dx = a.x - b.x, dy = a.y - b.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < linkDist) {
-          ctx.strokeStyle = colors[1];
-          ctx.globalAlpha = (1 - dist / linkDist) * 0.3;
-          ctx.lineWidth = devicePixelRatio;
-          ctx.beginPath();
-          ctx.moveTo(a.x, a.y);
-          ctx.lineTo(b.x, b.y);
-          ctx.stroke();
-        }
-      }
-    }
-
-    for (const n of nodes) {
-      ctx.globalAlpha = 0.8;
-      ctx.fillStyle = colors[n.hue];
-      ctx.beginPath();
-      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-      ctx.fill();
-    }
-    ctx.globalAlpha = 1;
-
-    t += 0.006;
-    if (!prefersReducedMotion) requestAnimationFrame(step);
-  }
-
-  resize();
-  window.addEventListener('resize', resize);
-  step();
-})();
-
 // Year in footer
 document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -170,29 +42,13 @@ if ('IntersectionObserver' in window) {
   revealEls.forEach(el => el.classList.add('is-visible'));
 }
 
-// Active nav link on scroll
-const sections = document.querySelectorAll('main section[id]');
-const navAnchors = document.querySelectorAll('.nav-link');
-const navObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    const id = entry.target.getAttribute('id');
-    const link = document.querySelector(`.nav-link[href="#${id}"]`);
-    if (!link) return;
-    if (entry.isIntersecting) {
-      navAnchors.forEach(a => a.style.color = '');
-      link.style.color = 'var(--text)';
-    }
-  });
-}, { rootMargin: '-40% 0px -50% 0px' });
-sections.forEach(sec => navObserver.observe(sec));
-
-// Hero title rotator
+// Role typewriter
 const roles = [
-  'Data Scientist',
-  'Machine Learning Engineer',
-  'Generative AI Architect',
-  'Agentic AI Systems Developer',
-  'AI Strategy Consultant'
+  'AI & Data Science Leader',
+  'Techno-Functional Strategist',
+  'Digital Transformation Leader',
+  'Agentic AI Program Lead',
+  'Enterprise AI Advisor'
 ];
 const rotator = document.getElementById('rotator');
 let roleIndex = 0;
@@ -205,7 +61,7 @@ function typeRole(text, cb) {
     i++;
     if (i === text.length) {
       clearInterval(interval);
-      setTimeout(cb, 1600);
+      setTimeout(cb, 1500);
     }
   }, 45);
 }
@@ -219,7 +75,7 @@ function eraseRole(cb) {
       clearInterval(interval);
       cb();
     }
-  }, 25);
+  }, 28);
 }
 
 function cycleRoles() {
@@ -233,28 +89,269 @@ function cycleRoles() {
 }
 cycleRoles();
 
-// Animated stat counters
+// Animated stat counters (Impact section)
 const statEls = document.querySelectorAll('.stat-value');
-const statObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (!entry.isIntersecting) return;
-    const el = entry.target;
-    const target = parseFloat(el.dataset.target);
-    const prefix = el.dataset.prefix || '';
-    const suffix = el.dataset.suffix || '';
-    const isDecimal = !Number.isInteger(target);
-    const duration = 1200;
-    const start = performance.now();
+if ('IntersectionObserver' in window) {
+  const statObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const target = parseFloat(el.dataset.target);
+      const prefix = el.dataset.prefix || '';
+      const suffix = el.dataset.suffix || '';
+      const isDecimal = !Number.isInteger(target);
+      const duration = 1100;
+      const start = performance.now();
 
-    function tick(now) {
-      const progress = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      const value = target * eased;
-      el.textContent = `${prefix}${isDecimal ? value.toFixed(1) : Math.round(value)}${suffix}`;
-      if (progress < 1) requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
-    statObserver.unobserve(el);
+      function tick(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const value = target * eased;
+        el.textContent = `${prefix}${isDecimal ? value.toFixed(1) : Math.round(value)}${suffix}`;
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+      statObserver.unobserve(el);
+    });
+  }, { threshold: 0.35 });
+  statEls.forEach(el => statObserver.observe(el));
+}
+
+// Ticker marquees (top of hero + above footer) — duplicate list for a seamless loop
+const tickerItems = ['MARITIME AI', 'TELECOM NETWORKS', 'ROBOTICS & IoT', 'DIGITIZATION', 'COST OPTIMIZATION', 'AGENTIC SYSTEMS', 'ENTERPRISE SCALE'];
+function renderTicker(elId) {
+  const el = document.getElementById(elId);
+  if (!el) return;
+  const loop = [...tickerItems, ...tickerItems];
+  el.innerHTML = loop.map((t, i) => {
+    const isLastOfSet = i % tickerItems.length === tickerItems.length - 1;
+    return `<span>${t}${isLastOfSet ? '' : '  //'}</span>`;
+  }).join('');
+}
+renderTicker('tickerTop');
+renderTicker('tickerBottom');
+
+// Systems canvas: an interactive AI value-chain diagram (Data -> AI/Intelligence ->
+// Business -> Enterprise Value) with hover tooltips, click-to-expand sub-nodes, a
+// dashed feedback loop, and animated flow particles along the spine.
+(function initSystemsCanvas() {
+  const canvas = document.getElementById('systemsCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const panel = canvas.closest('.graph-panel');
+  const tooltip = document.getElementById('graphTooltip');
+  const tooltipTitle = document.getElementById('graphTooltipTitle');
+  const tooltipBody = document.getElementById('graphTooltipBody');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const LAYERS = [
+    { id: 'data', label: 'DATA', metrics: 'Quality · Coverage · Freshness', desc: 'The foundation that feeds intelligence.', support: ['Enterprise Systems', 'IoT & Sensors', 'Docs & APIs'], detail: ['Ingestion', 'Validation', 'Feature Eng.', 'Data Products'] },
+    { id: 'ai', label: 'AI / INTELLIGENCE', metrics: 'Accuracy · Latency · Cost', desc: 'Transforms data into predictions & decisions.', support: ['Machine Learning', 'Generative AI', 'Agentic AI'], detail: ['RAG & Embeddings', 'Forecasting', 'Planning & Tools', 'MLOps'] },
+    { id: 'business', label: 'BUSINESS', metrics: 'Efficiency · Adoption · Quality', desc: 'Converts intelligence into operational outcomes.', support: ['Automation', 'Decision Speed', 'Customer Exp.'], detail: ['Hours Saved', 'Cycle Time', 'Conversion', 'Error Reduction'] },
+    { id: 'value', label: 'ENTERPRISE VALUE', metrics: 'Revenue · Cost · ROI', desc: 'The financial and strategic bottom line.', support: ['Revenue Growth', 'Cost Reduction', 'Risk Reduction'], detail: ['Margin', 'Cash Flow', 'Payback Period', 'Capital Efficiency'] }
+  ];
+  const layerY = [0.1, 0.38, 0.65, 0.92];
+  const supportOffsets = [{ dx: -0.32, dy: -0.02 }, { dx: 0.32, dy: -0.05 }, { dx: 0.17, dy: 0.1 }];
+  const detailOffsets = [{ dx: -0.36, dy: 0.06 }, { dx: 0.36, dy: -0.09 }, { dx: 0.22, dy: 0.14 }, { dx: -0.2, dy: 0.15 }];
+
+  let w, h;
+  let expandedLayer = null;
+  let lastHoverKey = null;
+  const pointer = { x: -9999, y: -9999, active: false };
+
+  function currentColor() {
+    return root.getAttribute('data-theme') === 'light' ? '#000000' : '#ffffff';
+  }
+
+  function resize() {
+    w = canvas.width = panel.clientWidth * devicePixelRatio;
+    h = canvas.height = panel.clientHeight * devicePixelRatio;
+    canvas.style.width = panel.clientWidth + 'px';
+    canvas.style.height = panel.clientHeight + 'px';
+  }
+
+  function buildNodes() {
+    const flat = [];
+    LAYERS.forEach((layer, li) => {
+      const lx = 0.5 * w, ly = layerY[li] * h;
+      flat.push({ key: `L${li}`, kind: 'layer', li, x: lx, y: ly, r: 8 * devicePixelRatio, label: layer.label, tipTitle: layer.label, tipBody: `${layer.desc} — ${layer.metrics}` });
+      const subs = expandedLayer === li ? layer.detail : layer.support;
+      const offsets = expandedLayer === li ? detailOffsets : supportOffsets;
+      subs.forEach((s, si) => {
+        const off = offsets[si];
+        flat.push({ key: `S${li}_${si}`, kind: 'sub', li, x: lx + off.dx * w, y: ly + off.dy * h, r: 3.2 * devicePixelRatio, label: s, parentKey: `L${li}`, tipTitle: s, tipBody: `Part of ${layer.label}` });
+      });
+    });
+    return flat;
+  }
+
+  function toCanvasXY(clientX, clientY) {
+    const rect = canvas.getBoundingClientRect();
+    return { x: (clientX - rect.left) * devicePixelRatio, y: (clientY - rect.top) * devicePixelRatio };
+  }
+  function nodeAt(nodes, x, y) {
+    const hitR = 20 * devicePixelRatio;
+    for (const n of nodes) if (Math.hypot(n.x - x, n.y - y) < hitR) return n;
+    return null;
+  }
+
+  canvas.addEventListener('mousemove', (e) => {
+    const p = toCanvasXY(e.clientX, e.clientY);
+    pointer.x = p.x; pointer.y = p.y; pointer.active = true;
   });
-}, { threshold: 0.4 });
-statEls.forEach(el => statObserver.observe(el));
+  canvas.addEventListener('mouseleave', () => { pointer.active = false; });
+  canvas.addEventListener('click', (e) => {
+    const p = toCanvasXY(e.clientX, e.clientY);
+    const hit = nodeAt(buildNodes(), p.x, p.y);
+    if (hit && hit.kind === 'layer') {
+      expandedLayer = expandedLayer === hit.li ? null : hit.li;
+    } else if (!hit) {
+      expandedLayer = null;
+    }
+  });
+
+  let t = 0;
+  function step() {
+    const color = currentColor();
+    ctx.clearRect(0, 0, w, h);
+    const nodes = buildNodes();
+    const hovered = pointer.active ? nodeAt(nodes, pointer.x, pointer.y) : null;
+    const hoverKey = hovered ? hovered.key : null;
+    canvas.style.cursor = hovered ? 'pointer' : 'default';
+    if (hoverKey !== lastHoverKey) {
+      lastHoverKey = hoverKey;
+      if (hovered) {
+        tooltip.classList.add('is-visible');
+        tooltip.style.left = (hovered.x / devicePixelRatio) + 'px';
+        tooltip.style.top = (hovered.y / devicePixelRatio) + 'px';
+        tooltipTitle.textContent = hovered.tipTitle;
+        tooltipBody.textContent = hovered.tipBody;
+      } else {
+        tooltip.classList.remove('is-visible');
+      }
+    }
+    const connected = new Set();
+    if (hovered) {
+      connected.add(hovered.key);
+      if (hovered.kind === 'sub') connected.add(hovered.parentKey);
+      if (hovered.kind === 'layer') nodes.forEach((n) => { if (n.parentKey === hovered.key) connected.add(n.key); });
+    }
+    const dim = (key) => (hovered ? (connected.has(key) ? 1 : 0.14) : 1);
+
+    // feedback loop (value -> data)
+    const dataN = nodes.find((n) => n.key === 'L0'), valueN = nodes.find((n) => n.key === 'L3');
+    if (dataN && valueN) {
+      ctx.save();
+      ctx.setLineDash([5 * devicePixelRatio, 6 * devicePixelRatio]);
+      ctx.lineDashOffset = -t * 20;
+      ctx.strokeStyle = color;
+      ctx.globalAlpha = 0.14 * dim('L0');
+      ctx.lineWidth = devicePixelRatio;
+      const cx = w * 0.94;
+      ctx.beginPath();
+      ctx.moveTo(valueN.x, valueN.y);
+      ctx.bezierCurveTo(cx, valueN.y, cx, dataN.y, dataN.x, dataN.y);
+      ctx.stroke();
+      ctx.restore();
+      ctx.globalAlpha = 0.3;
+      ctx.fillStyle = color;
+      ctx.font = `${9 * devicePixelRatio}px 'JetBrains Mono', monospace`;
+      ctx.textAlign = 'left';
+      ctx.fillText('FEEDBACK', cx - 2, (dataN.y + valueN.y) / 2);
+    }
+
+    // spine
+    for (let i = 0; i < 3; i++) {
+      const a = nodes.find((n) => n.key === `L${i}`), b = nodes.find((n) => n.key === `L${i + 1}`);
+      ctx.strokeStyle = color;
+      ctx.globalAlpha = 0.4 * Math.min(dim(a.key), dim(b.key));
+      ctx.lineWidth = 1.4 * devicePixelRatio;
+      ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+    }
+    // flow dots along spine
+    for (let d = 0; d < 3; d++) {
+      const prog = ((t * 0.012 + d / 3) % 1);
+      const seg = prog * 3;
+      const i = Math.min(2, Math.floor(seg));
+      const localT = seg - i;
+      const a = nodes.find((n) => n.key === `L${i}`), b = nodes.find((n) => n.key === `L${i + 1}`);
+      const jag = 5;
+      const flicker = 0.75 + Math.sin(t * 0.14 + d * 3) * 0.25 + (Math.random() < 0.04 ? 0.5 : 0);
+      ctx.save();
+      ctx.shadowColor = '#ffd75e';
+      ctx.shadowBlur = 14 * devicePixelRatio;
+      ctx.strokeStyle = '#ffe08a';
+      ctx.globalAlpha = 0.55 * flicker;
+      ctx.lineWidth = 1.3 * devicePixelRatio;
+      ctx.beginPath();
+      for (let s = 0; s <= jag; s++) {
+        const st = Math.max(0, localT - 0.09 + (0.09 * s) / jag);
+        const sx = a.x + (b.x - a.x) * st, sy = a.y + (b.y - a.y) * st;
+        const wobble = Math.sin(t * 0.5 + s * 2 + d) * 3.5 * devicePixelRatio * (s / jag);
+        const nx = -(b.y - a.y), ny = (b.x - a.x);
+        const len = Math.hypot(nx, ny) || 1;
+        const px = sx + (nx / len) * wobble, py = sy + (ny / len) * wobble;
+        s === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+      }
+      ctx.stroke();
+      ctx.restore();
+
+      const x = a.x + (b.x - a.x) * localT, y = a.y + (b.y - a.y) * localT;
+      ctx.save();
+      ctx.shadowColor = '#ffd75e';
+      ctx.shadowBlur = 16 * devicePixelRatio;
+      ctx.globalAlpha = Math.min(1, flicker);
+      ctx.fillStyle = '#fff3cf';
+      ctx.beginPath(); ctx.arc(x, y, 2.4 * devicePixelRatio, 0, Math.PI * 2); ctx.fill();
+      ctx.restore();
+    }
+
+    // sub edges
+    nodes.filter((n) => n.kind === 'sub').forEach((n) => {
+      const parent = nodes.find((p) => p.key === n.parentKey);
+      ctx.strokeStyle = color;
+      ctx.globalAlpha = 0.22 * dim(n.key);
+      ctx.lineWidth = devicePixelRatio * 0.8;
+      ctx.beginPath(); ctx.moveTo(parent.x, parent.y); ctx.lineTo(n.x, n.y); ctx.stroke();
+    });
+
+    // nodes
+    nodes.forEach((n) => {
+      const active = n.key === hoverKey;
+      const a = dim(n.key);
+      const isHub = n.kind === 'layer';
+      const hubPulse = isHub ? 0.75 + Math.sin(t * 0.003 + n.x * 0.01) * 0.25 : 1;
+      if (isHub) {
+        ctx.save();
+        ctx.shadowColor = '#ffd75e';
+        ctx.shadowBlur = 18 * devicePixelRatio * hubPulse;
+        ctx.globalAlpha = 0.95 * a * hubPulse * (active ? 1.15 : 1);
+        ctx.fillStyle = '#ffdd7a';
+        ctx.beginPath(); ctx.arc(n.x, n.y, n.r * (active ? 1.3 : 1), 0, Math.PI * 2); ctx.fill();
+        ctx.globalAlpha = 0.3 * a * hubPulse;
+        ctx.strokeStyle = '#ffd75e';
+        ctx.beginPath(); ctx.arc(n.x, n.y, n.r * 2, 0, Math.PI * 2); ctx.stroke();
+        ctx.restore();
+      } else {
+        ctx.globalAlpha = 0.6 * a * (active ? 1.15 : 1);
+        ctx.fillStyle = color;
+        ctx.beginPath(); ctx.arc(n.x, n.y, n.r * (active ? 1.3 : 1), 0, Math.PI * 2); ctx.fill();
+      }
+      ctx.globalAlpha = (isHub ? 0.9 : 0.55) * a;
+      ctx.fillStyle = isHub ? '#ffdd7a' : color;
+      ctx.font = `${(isHub ? 12 : 9.5) * devicePixelRatio}px 'JetBrains Mono', monospace`;
+      ctx.textBaseline = 'middle';
+      ctx.textAlign = n.x > w * 0.6 ? 'right' : 'left';
+      const lx = n.x > w * 0.6 ? n.x - (n.r + 8 * devicePixelRatio) : n.x + n.r + 8 * devicePixelRatio;
+      ctx.fillText(n.label, lx, n.y);
+    });
+
+    ctx.globalAlpha = 1;
+    t += 1;
+    if (!reduced) requestAnimationFrame(step);
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+  step();
+})();
