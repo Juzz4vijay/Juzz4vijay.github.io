@@ -150,7 +150,13 @@ ul { list-style: none; }
   letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.76rem;
   margin-bottom: 20px;
 }
-.eyebrow-dot { width: 7px; height: 7px; border-radius: 999px; background: var(--text); animation: driftDot 2.4s ease-in-out infinite; }
+.eyebrow-dot {
+  width: 7px; height: 7px;
+  border-radius: 999px;
+  background: #ff3b30;
+  box-shadow: 0 0 6px rgba(255, 59, 48, 0.7);
+  animation: driftDot 2.4s ease-in-out infinite;
+}
 
 .hero-name {
   font-family: var(--font-display);
